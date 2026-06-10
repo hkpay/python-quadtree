@@ -7,8 +7,9 @@ from quadtree import QTreePartition, PointQTreeNode, build_point_qtree
 
 SCREEN_MARGIN = 30
 SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+SCREEN_HEIGHT = 800
 SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
+SCREEN_SIZE_WITH_MARGINS = (SCREEN_WIDTH - SCREEN_MARGIN, SCREEN_HEIGHT - SCREEN_MARGIN)
 SCREEN_CENTER = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 FPS = 60
 
@@ -32,7 +33,9 @@ def generate_random_points(points_count):
     return points
 
 def draw_qtree_node(qtreenode, surface):
-    pygame.draw.rect(surface, WHITE, (qtreenode.partition.x, qtreenode.partition.y, qtreenode.partition.w, qtreenode.partition.h), 1)
+    rect = pygame.Rect(0, 0, qtreenode.partition.w * 2, qtreenode.partition.h * 2)
+    rect.center = (qtreenode.partition.x + SCREEN_WIDTH / 2, qtreenode.partition.y + SCREEN_HEIGHT / 2)
+    pygame.draw.rect(surface, WHITE, rect, 1)
 
 def main():
     pygame.init()
@@ -43,7 +46,7 @@ def main():
 
     points = generate_random_points(POINTS_COUNT)
 
-    qtree = PointQTreeNode(QTreePartition(0, 0, SCREEN_WIDTH - SCREEN_MARGIN / 2, SCREEN_HEIGHT - SCREEN_MARGIN / 2))
+    qtree = PointQTreeNode(QTreePartition(0, 0, SCREEN_SIZE_WITH_MARGINS[0] / 2, SCREEN_SIZE_WITH_MARGINS[1] / 2))
 
     running = True
     while running:
@@ -57,8 +60,8 @@ def main():
                     running = False
         screen.fill(BLACK)
         draw_qtree_node(qtree, screen)
-        for point in points:
-            pygame.draw.circle(screen, WHITE, point, POINT_RADIUS, 1)
+        # for point in points:
+        #    pygame.draw.circle(screen, WHITE, point, POINT_RADIUS, 1)
         pygame.display.flip()
         clock.tick(FPS)
 
