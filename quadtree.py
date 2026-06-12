@@ -31,14 +31,14 @@ class PointQTreeNode:
                     child.insert(point)
 
     def subdivide(self):
-        north_west_partition = QTreePartition(self.partition.x, self.partition.y, (self.partition.w / 2) + 1, (self.partition.h / 2) + 1)
+        north_west_partition = QTreePartition(self.partition.x, self.partition.y, self.partition.w / 2, self.partition.h / 2)
         self.children.append(PointQTreeNode(north_west_partition))
 
-        south_west_partition = QTreePartition(self.partition.x, self.partition.y + self.partition.h / 2, (self.partition.w / 2) + 1, (self.partition.h / 2) + 1)
+        south_west_partition = QTreePartition(self.partition.x, self.partition.y + self.partition.h / 2, self.partition.w / 2, self.partition.h / 2)
         self.children.append(PointQTreeNode(south_west_partition))
 
-        south_east_partition = QTreePartition(self.partition.x + self.partition.w / 2, self.partition.y + self.partition.h / 2, (self.partition.w / 2) + 1, (self.partition.h / 2) + 1)
+        south_east_partition = QTreePartition(self.partition.x + self.partition.w / 2, self.partition.y + self.partition.h / 2, self.partition.w / 2, self.partition.h / 2)
         self.children.append(PointQTreeNode(south_east_partition))
 
-        north_east_partition = QTreePartition(self.partition.x + self.partition.w / 2, self.partition.y, (self.partition.w / 2) + 1, (self.partition.h / 2) + 1)
+        north_east_partition = QTreePartition(self.partition.x + self.partition.w / 2, self.partition.y, self.partition.w / 2, self.partition.h / 2)
         self.children.append(PointQTreeNode(north_east_partition))
