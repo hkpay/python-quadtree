@@ -72,8 +72,6 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     running = False
         screen.fill(BLACK)
-        myrect = pygame.Rect(POINT_SPAWN_AREA_MIN[0], POINT_SPAWN_AREA_MIN[1], POINT_SPAWN_AREA_SIZE[0], POINT_SPAWN_AREA_SIZE[1])
-        pygame.draw.rect(screen, WHITE, myrect, 1)
         draw_qtree(qtree, screen)
         for point in points:
             pygame.draw.circle(screen, WHITE, point, POINT_RADIUS, 1)
