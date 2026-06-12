@@ -9,7 +9,6 @@ class QTreePartition:
 class PointQTreeNode:
     def __init__(self, partition):
         self.children = [] # list of QTreeNodes
-        self.level = 0
         self.partition = partition
         self.points = []
     
